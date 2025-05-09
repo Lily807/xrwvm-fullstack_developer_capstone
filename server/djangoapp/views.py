@@ -95,11 +95,16 @@ def get_cars(request):
 
 #Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
+    print('djangoapp/views - def get_dealerships - START')
     if(state == "All"):
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/"+state
+    print('state=', state)
+    print('endpoint set to:', endpoint)
     dealerships = get_request(endpoint)
+    print('dealerships = get_request(endpoint)', dealerships)
+    print('djangoapp/views - def get_dealerships - END')
     return JsonResponse({"status":200,"dealers":dealerships})
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer

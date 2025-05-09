@@ -32,6 +32,8 @@ class CarMake(models.Model):
 # - __str__ method to print a car make object
 
 class CarModel(models.Model):
+    #Dealer Id (IntegerField) refers to a dealer created in Cloudant database
+    dealer_id = models.IntegerField(default=0)
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)  # Many-to-One relationship
     name = models.CharField(max_length=100)
     CAR_TYPES = [

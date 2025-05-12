@@ -61,7 +61,7 @@ def registration(request):
         # Check if user already exists
         User.objects.get(username=username)
         username_exist = True
-    except:
+    except User.DoesNotExist:
         logger.debug("{} is new user".format(username))
 
 
@@ -121,7 +121,7 @@ def get_dealer_reviews(request, dealer_id):
         reviews = get_request(endpoint)
         for review_detail in reviews:
             response = analyze_review_sentiments(review_detail['review'])
-            print(response)
+            # print(response)
             review_detail['sentiment'] = response['sentiment']
         return JsonResponse({"status": 200, "reviews": reviews})
     else:
@@ -142,12 +142,12 @@ def get_dealer_details(request, dealer_id):
 # Create a `add_review` view to submit a review
 # def add_review(request):
 def add_review(request):
-    if (request.user.is_anonymous == False):
+    if not (request.user.is_anonymous):
         data = json.loads(request.body)
         try:
             response = post_review(data)
             return JsonResponse({"status": 200})
-        except:
+        except SomeSpecificException as e:
             return JsonResponse(
                 {"status": 401, "message": "Error in posting review"})
     else:

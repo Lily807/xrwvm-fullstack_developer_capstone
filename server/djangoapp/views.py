@@ -1,8 +1,8 @@
-#from django.shortcuts import render
-#from django.http import HttpResponseRedirect, HttpResponse
-#from django.shortcuts import get_object_or_404, render, redirect
-#from django.contrib import messages
-#from datetime import datetime
+# from django.shortcuts import render
+# from django.http import HttpResponseRedirect, HttpResponse
+# from django.shortcuts import get_object_or_404, render, redirect
+# from django.contrib import messages
+# from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth import logout
@@ -19,6 +19,7 @@ import json
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
+
 # Create a `login_request` view to handle sign in request
 @csrf_exempt
 def login_user(request):
@@ -34,6 +35,7 @@ def login_user(request):
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
     return JsonResponse(data)
+
 
 # Create a `logout_request` view to handle sign out request
 def logout_request(request):

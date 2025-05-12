@@ -63,4 +63,3 @@ def post_review(data_dict):
         return response.json()
     except Exception as err:
         print(f"Exception occurred {err=} of type {type(err)}")
-        
